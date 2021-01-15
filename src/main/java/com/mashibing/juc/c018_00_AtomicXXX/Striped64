@@ -1,0 +1,12 @@
+Striped64类
+
+Striped64是一个高并发累加的工具类。
+
+Striped64的设计核心思路就是通过内部的分散计算来避免竞争。
+
+Striped64内部包含一个base和一个Cell[] cells数组，又叫hash表。
+
+没有竞争的情况下，要累加的数通过cas累加到base上；
+如果有竞争的话，会将要累加的数累加到Cells数组中的某个cell元素里面。
+
+所以整个Striped64的值为sum=base+∑[0~n]cells。
